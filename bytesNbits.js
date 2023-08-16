@@ -11,41 +11,42 @@ function bytesNBitsGame(numOfQuestions) {
 
     // Generate a random question unit: Bits, B, KB, MB, GB, TB
 
-    for (let i = 1; i < 4; i++) {
+    for (let i = 0; i < 10; i++) {
+
         const unit = randomUnit();
-        //console.log(i, unit)
+
 
         if (unit === 'bits') {
             inputUnit = 'B';
             answerInt = randomInt / 8
-            return unit, inputUnit
+            return `${unit} ">" ${inputUnit}`
 
         } else if (unit === 'TB') {
 
             inputUnit = 'GB';
-            return unit, inputUnit
+            return `${unit} ">" ${inputUnit}`
         } else if (unit === 'KB') {
 
-            inputUnit = 'B'
-            // const unitArr = ['B', 'MB']
-            //return unitArr[Math.floor(Math.random() * unitArr.length)]
-            return unit, inputUnit
+            const unitArr = ['B', 'MB']
+            inputUnit = unitArr[Math.floor(Math.random() * unitArr.length)]
+            return `${unit} ">" ${inputUnit}`
+
         } else if (unit === 'MB') {
-            inputUnit = 'KB'
-            return unit, inputUnit
+
+            const unitArr = ['KB', 'GB']
+            inputUnit = unitArr[Math.floor(Math.random() * unitArr.length)]
+            return `${unit} ">" ${inputUnit}`
 
         } else if (unit === 'GB') {
-            inputUnit = 'MB'
-            return unit, inputUnit
+
+            const unitArr = ['MB', 'TB']
+            inputUnit = unitArr[Math.floor(Math.random() * unitArr.length)]
+            return `${unit} ">" ${inputUnit}`
         }
 
     }
-    console.log(endTime(start))
+    // console.log(endTime(start))
 }
-
-
-
-
 
 
 function startTime() {
