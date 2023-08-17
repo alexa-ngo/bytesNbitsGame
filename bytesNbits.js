@@ -1,3 +1,5 @@
+const prompts = require('prompts');
+
 function bytesNBitsGame() {
 
     let answerInt = 0;
@@ -6,7 +8,7 @@ function bytesNBitsGame() {
     // Generate integer between 1-128
     const randomInt = randomIntFromInterval()
 
-    for (let j = 0; j < 4; j++) {
+    for (let j = 0; j < 1; j++) {
 
         const unit = randomUnit();
 
@@ -69,6 +71,7 @@ function bytesNBitsGame() {
             }
         }
     }
+    console.log(response)
 }
 
 function startTime() {
@@ -88,7 +91,7 @@ function randomIntFromInterval() {
 function randomUnit() {
     const unitArr = ['bits', 'B', 'KB', 'MB', 'GB', 'TB']
     return unitArr[Math.floor(Math.random() * unitArr.length)]
-};
+}
 
 function calcPercent(points, numOfQuestions) {
 
@@ -107,7 +110,37 @@ function calcPercent(points, numOfQuestions) {
     } else if (percentage < 75) {
         return `Oh! You got ${percentage}%! You can do better! ${improvementArrComment}`
     }
-};
+}
+
+function theGame(userInput) {
+
+    console.log(`***********************`)
+    console.log()
+    console.log(`    BYTES 'N BITS      `)
+    console.log()
+    console.log(`***********************`)
+
+    const start = startTime()
+    let points = 0;
+    const numOfQuestions = 4
+
+    for (let i = 0; i < numOfQuestions; i++) {
+        console.log()
+        const answerInt = bytesNBitsGame()
+        console.log(answerInt)
+        userInput = answerInt
+        if (userInput === answerInt) {
+            points += 1
+
+        }
+    }
+    console.log()
+    console.log(`***********************`)
+    console.log('Your Data:')
+    console.log(endTime(start))
+    console.log(`You earned ${points} points out of ${numOfQuestions} questions!`)
+    console.log(calcPercent(points, numOfQuestions))
+}
 
 function theGame(userInput) {
 
@@ -140,6 +173,8 @@ function theGame(userInput) {
 }
 
 theGame()
+
+//**** DELETE BELOW THIS
 
 // const val = 5
 // console.log(theGame(val))
