@@ -1,7 +1,4 @@
-function bytesNBitsGame(numOfQuestions) {
-
-    // Starts the timer
-    const start = startTime()
+function bytesNBitsGame() {
 
     let answerInt = 0;
     let inputUnit = null;
@@ -9,18 +6,21 @@ function bytesNBitsGame(numOfQuestions) {
     // Generate integer between 1-128
     const randomInt = randomIntFromInterval()
 
-    for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < 4; j++) {
 
-        // Generates random unit
         const unit = randomUnit();
 
         if (unit === 'bits') {
             inputUnit = 'B';
             answerInt = randomInt / 8
+            console.log(`____ B = ${randomInt} bits`)
+            return `${answerInt}`
 
         } else if (unit === 'TB') {
             inputUnit = 'GB';
             answerInt = randomInt * 1000
+            console.log(`____ GB = ${randomInt} TB`)
+            return `${answerInt}`
 
         } else if (unit === 'KB') {
 
@@ -29,8 +29,12 @@ function bytesNBitsGame(numOfQuestions) {
 
             if (inputUnit === 'B') {
                 answerInt = randomInt * 1000
+                console.log(`____ B = ${randomInt} KB`)
+                return `${answerInt}`
             } else {
                 answerInt = randomInt / 1000
+                console.log(`____ MB = ${randomInt} KB`)
+                return `${answerInt}`
             }
 
         } else if (unit === 'MB') {
@@ -40,8 +44,12 @@ function bytesNBitsGame(numOfQuestions) {
 
             if (inputUnit === 'KB') {
                 answerInt = randomInt * 1000
+                console.log(`____ KB = ${randomInt} MB`)
+                return `${answerInt}`
             } else {
                 answerInt = randomInt / 1000
+                console.log(`____ GB = ${randomInt} MB`)
+                return `${answerInt}`
             }
 
 
@@ -52,23 +60,19 @@ function bytesNBitsGame(numOfQuestions) {
 
             if (inputUnit === 'MB') {
                 answerInt = randomInt * 1000
+                console.log(`____ MB = ${randomInt} GB`)
+                return `${answerInt}`
             } else {
                 answerInt = randomInt / 1000
+                console.log(`____ TB = ${randomInt} GB`)
+                return `${answerInt}`
             }
         }
     }
-
-    // Ends the timer
-    console.log(endTime(start))
-    return answerInt
-
 }
 
 function startTime() {
     let start = Date.now();
-    // for (let i = 0; i < 1000; i++) {
-    //     console.log('hi')
-    // }
     return start
 };
 
@@ -85,19 +89,6 @@ function randomUnit() {
     const unitArr = ['bits', 'B', 'KB', 'MB', 'GB', 'TB']
     return unitArr[Math.floor(Math.random() * unitArr.length)]
 };
-
-function playerInput(val) {
-
-    let points = 0;
-    // Hardcoding the answerInt to simulate the input number
-    // const answerInt = bytesNBitsGame(4);
-    const answerInt = 4
-    if (val === answerInt) {
-        points += 1
-    }
-    return points;
-};
-
 
 function calcPercent(points, numOfQuestions) {
 
@@ -118,10 +109,44 @@ function calcPercent(points, numOfQuestions) {
     }
 };
 
+function theGame(userInput) {
 
+    console.log(`***********************`)
+    console.log()
+    console.log(`    BYTES 'N BITS      `)
+    console.log()
+    console.log(`***********************`)
 
-const num = 4
-console.log(bytesNBitsGame(num));
+    const start = startTime()
+    let points = 0;
+    const numOfQuestions = 4
+
+    for (let i = 0; i < numOfQuestions; i++) {
+        console.log()
+        const answerInt = bytesNBitsGame()
+        console.log(answerInt)
+        userInput = answerInt
+        if (userInput === answerInt) {
+            points += 1
+
+        }
+    }
+    console.log()
+    console.log(`***********************`)
+    console.log('Your Data:')
+    console.log(endTime(start))
+    console.log(`You earned ${points} points out of ${numOfQuestions} questions!`)
+    console.log(calcPercent(points, numOfQuestions))
+}
+
+theGame()
+
+// const val = 5
+// console.log(theGame(val))
+// const num = 4
+// //const start = startTime()
+// console.log(bytesNBitsGame(num));
+//console.log(endTime(start))
 
 // const points = 2
 // const numOfQuestions = 4
