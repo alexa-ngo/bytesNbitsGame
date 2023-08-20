@@ -1,6 +1,6 @@
 const prompts = require('prompts');
 
-function bytesNBitsGame() {
+export function bytesNBitsGame() {
 
     // The calculated answer integer. The player will earn one point if they respond with this answer
     let answerInt = 0;
@@ -88,14 +88,14 @@ function bytesNBitsGame() {
     }
 }
 
-async function theGame() {
+export async function theGame() {
     const response = await prompts({
         type: 'text', name: 'value', message: 'What is your input?'
     })
     return response.value
 }
 
-async function callMoreTimes(numOfQuestions) {
+export async function callMoreTimes(numOfQuestions) {
 
     // Starts the timer for the game
     const start = startTime()
@@ -138,7 +138,7 @@ async function callMoreTimes(numOfQuestions) {
     console.log(`****************************************************************`)
 }
 
-function startTime() {
+export function startTime() {
     let start = Date.now();
     return start
 }
@@ -189,5 +189,5 @@ function letsPlay(numOfQuestions) {
     callMoreTimes(num)
 }
 
-const numOfQuestions = 5
-letsPlay(numOfQuestions)
+// const numOfQuestions = 5
+// letsPlay(numOfQuestions)
