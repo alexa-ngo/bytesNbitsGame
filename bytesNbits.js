@@ -2,10 +2,13 @@ const prompts = require('prompts');
 
 function bytesNBitsGame() {
 
+    // The calculated answer integer. The player will earn one point if they respond with this answer
     let answerInt = 0;
+
+    // Assigns the unit for the player to convert to
     let inputUnit = null;
 
-    // Generate integer between 1-128
+    // Generates an integer between 1-128 to be converted
     const randomInt = randomIntFromInterval()
 
     // Generates the unit to solve for
@@ -94,8 +97,10 @@ async function theGame() {
 
 async function callMoreTimes(numOfQuestions) {
 
+    // Starts the timer for the game
     const start = startTime()
 
+    // Tracks the number of points a player has earned
     let points = 0;
 
     for (let i = 1; i < numOfQuestions + 1; i++) {
@@ -120,9 +125,12 @@ async function callMoreTimes(numOfQuestions) {
     console.log(`****************************************************************`)
     console.log(`************************** YOUR STATS **************************`)
     console.log()
+
     //Calcualtes the percent correct
     const calcPer = calcPercent(points, numOfQuestions)
     console.log(calcPer)
+
+    // Ends the timer for the game
     console.log(endTime(start))
     console.log()
     console.log(`You earned ${points} points out of ${numOfQuestions} questions!`)
@@ -149,6 +157,7 @@ function randomUnit() {
     return unitArr[Math.floor(Math.random() * unitArr.length)]
 }
 
+// Function calcuates the percentage of correct answers
 function calcPercent(points, numOfQuestions) {
 
     const percentage = (points / numOfQuestions) * 100
@@ -169,14 +178,16 @@ function calcPercent(points, numOfQuestions) {
 }
 
 
-function letsPlay() {
+function letsPlay(numOfQuestions) {
 
+    const num = numOfQuestions
     console.log(`****************************************************************`)
     console.log()
     console.log(`                         BYTES 'N BITS                          `)
     console.log()
     console.log(`****************************************************************`)
-    callMoreTimes(10)
+    callMoreTimes(num)
 }
 
-letsPlay()
+const numOfQuestions = 5
+letsPlay(numOfQuestions)
