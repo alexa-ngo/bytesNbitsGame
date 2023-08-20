@@ -1,18 +1,14 @@
 const prompts = require('prompts');
 
-export function bytesNBitsGame() {
+
+
+function bytesNBitsGame(randomInt, unit) {
 
     // The calculated answer integer. The player will earn one point if they respond with this answer
     let answerInt = 0;
 
     // Assigns the unit for the player to convert to
     let inputUnit = null;
-
-    // Generates an integer between 1-128 to be converted
-    const randomInt = randomIntFromInterval()
-
-    // Generates the unit to solve for
-    const unit = randomUnit();
 
     if (unit === 'bits') {
         inputUnit = 'B';
@@ -88,17 +84,23 @@ export function bytesNBitsGame() {
     }
 }
 
-export async function theGame() {
+async function theGame() {
     const response = await prompts({
         type: 'text', name: 'value', message: 'What is your input?'
     })
     return response.value
 }
 
-export async function callMoreTimes(numOfQuestions) {
+async function letsPlay(numOfQuestions) {
+
+    console.log(`****************************************************************`)
+    console.log()
+    console.log(`                         BYTES 'N BITS                          `)
+    console.log()
+    console.log(`****************************************************************`)
 
     // Starts the timer for the game
-    const start = startTime()
+    const start = Date.now();
 
     // Tracks the number of points a player has earned
     let points = 0;
@@ -131,31 +133,15 @@ export async function callMoreTimes(numOfQuestions) {
     console.log(calcPer)
 
     // Ends the timer for the game
-    console.log(endTime(start))
+    let timeTaken = ((Date.now() - start) / 1000).toFixed(2);
+
+    console.log(`Total time taken : ${timeTaken} seconds`)
     console.log()
     console.log(`You earned ${points} points out of ${numOfQuestions} questions!`)
     console.log()
     console.log(`****************************************************************`)
 }
 
-export function startTime() {
-    let start = Date.now();
-    return start
-}
-
-function endTime(startTime) {
-    let timeTaken = ((Date.now() - startTime) / 1000).toFixed(2);
-    return `Total time taken : ${timeTaken} seconds`
-}
-
-function randomIntFromInterval() {
-    return Math.floor(Math.random() * (128) + 1)
-}
-
-function randomUnit() {
-    const unitArr = ['bits', 'B', 'KB', 'MB', 'GB', 'TB']
-    return unitArr[Math.floor(Math.random() * unitArr.length)]
-}
 
 // Function calcuates the percentage of correct answers
 function calcPercent(points, numOfQuestions) {
@@ -177,17 +163,20 @@ function calcPercent(points, numOfQuestions) {
     }
 }
 
-
-function letsPlay(numOfQuestions) {
-
-    const num = numOfQuestions
-    console.log(`****************************************************************`)
-    console.log()
-    console.log(`                         BYTES 'N BITS                          `)
-    console.log()
-    console.log(`****************************************************************`)
-    callMoreTimes(num)
+function generateRandomInt() {
+    return Math.floor(Math.random() * (128) + 1)
 }
 
-// const numOfQuestions = 5
-// letsPlay(numOfQuestions)
+function generateRandomUnit() {
+    const unitArr = ['bits', 'B', 'KB', 'MB', 'GB', 'TB']
+    return unitArr[Math.floor(Math.random() * unitArr.length)]
+}
+
+const numOfQuestions = 5
+
+
+const randomInt = 1
+//const randUnit = 'TB'
+const randUnit = generateRandomUnit()
+console.log(bytesNBitsGame(randomInt, randUnit))
+//letsPlay(numOfQuestions)
