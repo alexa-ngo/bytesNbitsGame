@@ -1,14 +1,15 @@
-const prompts = require('prompts');
 
+import { generateRandomInt, generateRandomUnit, sizeGenerator } from './randomLibrary.mjs';
+import prompts from 'prompts';
+//const prompts = require('prompts');
 
-
-function bytesNBitsGame(randomInt, unit) {
+function bytesNBitsGame(randomInt, unit, zeroOrOne) {
 
     // The calculated answer integer. The player will earn one point if they respond with this answer
     let answerInt = 0;
 
     // Assigns the unit for the player to convert to
-    let inputUnit = null;
+    let inputUnit = zeroOrOne;
 
     if (unit === 'bits') {
         inputUnit = 'B';
@@ -24,10 +25,7 @@ function bytesNBitsGame(randomInt, unit) {
 
     } else if (unit === 'B') {
 
-        const unitArr = ['bits', 'KB']
-        inputUnit = unitArr[Math.floor(Math.random() * unitArr.length)]
-
-        if (inputUnit === 'bits') {
+        if (inputUnit === '0') {   // was bits
             answerInt = randomInt * 8
             console.log(`____ bits = ${randomInt} B`)
             return `${answerInt}`
@@ -39,10 +37,7 @@ function bytesNBitsGame(randomInt, unit) {
 
     } else if (unit === 'KB') {
 
-        const unitArr = ['B', 'MB']
-        inputUnit = unitArr[Math.floor(Math.random() * unitArr.length)]
-
-        if (inputUnit === 'B') {
+        if (inputUnit === '0') {                        // was B
             answerInt = randomInt * 1000
             console.log(`____ B = ${randomInt} KB`)
             return `${answerInt}`
@@ -54,10 +49,7 @@ function bytesNBitsGame(randomInt, unit) {
 
     } else if (unit === 'MB') {
 
-        const unitArr = ['KB', 'GB']
-        inputUnit = unitArr[Math.floor(Math.random() * unitArr.length)]
-
-        if (inputUnit === 'KB') {
+        if (inputUnit === '0') {                       // was KB
             answerInt = randomInt * 1000
             console.log(`____ KB = ${randomInt} MB`)
             return `${answerInt}`
@@ -69,10 +61,7 @@ function bytesNBitsGame(randomInt, unit) {
 
     } else if (unit === 'GB') {
 
-        const unitArr = ['MB', 'TB']
-        inputUnit = unitArr[Math.floor(Math.random() * unitArr.length)]
-
-        if (inputUnit === 'MB') {
+        if (inputUnit === '0') {
             answerInt = randomInt * 1000
             console.log(`____ MB = ${randomInt} GB`)
             return `${answerInt}`
@@ -111,7 +100,10 @@ async function letsPlay(numOfQuestions) {
         console.log()
         console.log(`Question #`, i)
         console.log()
-        const answerIntAsString = bytesNBitsGame();
+        const randomInt = generateRandomInt()
+        const randomUnit = generateRandomUnit()
+        const zeroOrOne = sizeGenerator()
+        const answerIntAsString = bytesNBitsGame(randomInt, randomUnit, zeroOrOne)
         const answerInt = parseFloat(answerIntAsString)
         console.log()
         console.log(answerInt)
@@ -163,20 +155,6 @@ function calcPercent(points, numOfQuestions) {
     }
 }
 
-function generateRandomInt() {
-    return Math.floor(Math.random() * (128) + 1)
-}
 
-function generateRandomUnit() {
-    const unitArr = ['bits', 'B', 'KB', 'MB', 'GB', 'TB']
-    return unitArr[Math.floor(Math.random() * unitArr.length)]
-}
-
-const numOfQuestions = 5
-
-
-const randomInt = 1
-//const randUnit = 'TB'
-const randUnit = generateRandomUnit()
-console.log(bytesNBitsGame(randomInt, randUnit))
-//letsPlay(numOfQuestions)
+const numOfQuestions = 10
+letsPlay(numOfQuestions)
