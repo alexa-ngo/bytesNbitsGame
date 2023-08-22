@@ -1,7 +1,7 @@
 
-import { generateRandomInt, generateRandomUnit, sizeGenerator } from './randomLibrary.mjs';
-import prompts from 'prompts';
-//const prompts = require('prompts');
+const { positiveGenerator, improvementGenerator } = require("./randomLibrary.js");
+//import prompts from 'prompts';
+const prompts = require('prompts');
 
 function bytesNBitsGame(randomInt, unit, zeroOrOne) {
 
@@ -59,7 +59,7 @@ function bytesNBitsGame(randomInt, unit, zeroOrOne) {
             return `${answerInt}`
         }
 
-    } else if (unit === 'GB') {
+    } else {
 
         if (inputUnit === '0') {
             answerInt = randomInt * 1000
@@ -138,23 +138,33 @@ async function letsPlay(numOfQuestions) {
 // Function calcuates the percentage of correct answers
 function calcPercent(points, numOfQuestions) {
 
-    const percentage = (points / numOfQuestions) * 100
+    const percentage = (points / numOfQuestions) * 100;
 
-    const positiveArr = ['Good job!', 'Great job!', 'Fantastic!']
-    const positiveComment = positiveArr[Math.floor(Math.random() * positiveArr.length)]
-
-    const improvementArr = ['Try again!', "Don't give up!", 'More practice is key!']
-    const improvementArrComment = improvementArr[Math.floor(Math.random() * improvementArr.length)]
+    const positiveComment = positiveGenerator();
+    const improvementArrComment = improvementGenerator();
 
     if (percentage >= 90) {
-        return `Wow! You got ${percentage}% correct! ${positiveComment}`
+        return `Wow! You got ${percentage}% correct! ${positiveComment}`;
     } else if (percentage >= 75) {
-        return `Great! You got ${percentage}%! ${positiveComment}`
-    } else if (percentage < 75) {
-        return `Oh! You got ${percentage}%! You can do better! ${improvementArrComment}`
+        return `Great! You got ${percentage}%! ${positiveComment}`;
+    } else {
+        return `Oh! You got ${percentage}%! You can do better! ${improvementArrComment}`;
     }
-}
+};
 
 
-const numOfQuestions = 10
-letsPlay(numOfQuestions)
+
+// const numOfQuestions = 10
+// letsPlay(numOfQuestions)
+
+// const points = 4
+// const numOfQuestions = 4
+
+// console.log(calcPercent(points, numOfQuestions))
+
+module.exports = {
+    calcPercent,
+    bytesNBitsGame,
+    theGame,
+    letsPlay
+};
