@@ -1,3 +1,5 @@
+const prompts = require('prompts');
+
 function generateRandomInt() {
     return Math.floor(Math.random() * (128) + 1);
 }
@@ -25,10 +27,23 @@ function improvementGenerator() {
     return improvementArrComment;
 }
 
+function startTimer() {
+    return Date.now();
+}
+
+async function getUserInput() {
+    const response = await prompts({
+        type: 'text', name: 'value', message: 'What is your input?'
+    });
+    return response.value;
+}
+
 module.exports = {
     generateRandomInt,
     generateRandomUnit,
     sizeGenerator,
     positiveGenerator,
-    improvementGenerator
+    improvementGenerator,
+    startTimer,
+    getUserInput
 };
