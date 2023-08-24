@@ -1,7 +1,6 @@
-const { calcPercent, getUserInput, letsPlay } = require("./bytesNbits.js");
+const { calcPercent, letsPlay } = require("./bytesNbits.js");
 const { bytesNBitsGame } = require("./bytesNbits.js");
 const practiceLib = require("./randomLibrary.js");
-
 
 jest.mock('./randomLibrary.js', () => ({
     generateRandomInt: jest.fn(),
@@ -12,6 +11,20 @@ jest.mock('./randomLibrary.js', () => ({
     startTimer: jest.fn(),
     getUserInput: jest.fn()
 }));
+
+describe("This tests the generateRandomInt function by mocking math.random: ", () => {
+
+    afterEach(() => {
+        jest.resetAllMocks();
+    });
+
+    it('Returns 58.', () => {
+
+        const randIntGen01 = jest.spyOn(practiceLib, "generateRandomInt");
+        randIntGen01.mockImplementation(() => 58);
+
+    })
+});
 
 describe("This tests the calculatePercent function: ", () => {
 
@@ -27,14 +40,12 @@ describe("This tests the calculatePercent function: ", () => {
         const pGenerator = jest.spyOn(practiceLib, "positiveGenerator");
         pGenerator.mockImplementation(() => 'Good job');
 
-        const positiveComment = practiceLib.positiveGenerator();
-        console.log('This is expected to be "Good job": ', positiveComment);
+        practiceLib.positiveGenerator();
 
         const iGenerator = jest.spyOn(practiceLib, "improvementGenerator");
         iGenerator.mockImplementation(() => 'Try again');
 
-        const improvementComment = practiceLib.improvementGenerator();
-        console.log('This is expected to be "Try again": ', improvementComment);
+        practiceLib.improvementGenerator();
 
         const result = calcPercent(points, numOfQuestions);
 
@@ -50,14 +61,12 @@ describe("This tests the calculatePercent function: ", () => {
         const pGenerator = jest.spyOn(practiceLib, "positiveGenerator");
         pGenerator.mockImplementation(() => 'Great job');
 
-        const positiveComment = practiceLib.positiveGenerator();
-        console.log('This is expected to be "Great job": ', positiveComment);
+        practiceLib.positiveGenerator();
 
         const iGenerator = jest.spyOn(practiceLib, "improvementGenerator");
         iGenerator.mockImplementation(() => "Don't give up!");
 
-        const improvementComment = practiceLib.improvementGenerator();
-        console.log('This is expected to be "Do not give up!": ', improvementComment);
+        practiceLib.improvementGenerator();
 
         const result = calcPercent(points, numOfQuestions);
 
@@ -72,14 +81,12 @@ describe("This tests the calculatePercent function: ", () => {
         const pGenerator = jest.spyOn(practiceLib, "positiveGenerator");
         pGenerator.mockImplementation(() => 'Great job');
 
-        const positiveComment = practiceLib.positiveGenerator();
-        console.log('This is expected to be "Great job": ', positiveComment);
+        practiceLib.positiveGenerator();
 
         const iGenerator = jest.spyOn(practiceLib, "improvementGenerator");
         iGenerator.mockImplementation(() => "Don't give up!");
 
-        const improvementComment = practiceLib.improvementGenerator();
-        console.log('This is expected to be "Do not give up!": ', improvementComment);
+        practiceLib.improvementGenerator();
 
         const result = calcPercent(points, numOfQuestions);
 
@@ -95,14 +102,12 @@ describe("This tests the calculatePercent function: ", () => {
         const pGenerator = jest.spyOn(practiceLib, "positiveGenerator");
         pGenerator.mockImplementation(() => 'Great job');
 
-        const positiveComment = practiceLib.positiveGenerator();
-        console.log('This is expected to be "Great job": ', positiveComment);
+        practiceLib.positiveGenerator();
 
         const iGenerator = jest.spyOn(practiceLib, "improvementGenerator");
         iGenerator.mockImplementation(() => 'More practice is key!');
 
-        const improvementComment = practiceLib.improvementGenerator();
-        console.log('This is expected to be "More practice is key!": ', improvementComment);
+        practiceLib.improvementGenerator();
 
         const result = calcPercent(points, numOfQuestions);
 
@@ -161,92 +166,45 @@ describe("This tests the zero and one in the sizeGenerator function", () => {
     });
 });
 
-
 describe("This tests the bytesNBitsGame function", () => {
 
-    it("Returns the answerInt when the randomInt, randomUnit, and zeroOrOne is mocked", () => {
+    it("Returns 0 points when the input is incorrect", async () => {
+        expect.assertions(1);
 
         const randomInt = 88;
         const randomUnit = 'bits';
         const zeroOrOne = '1';
-        const bytesResults = bytesNBitsGame(randomInt, randomUnit, zeroOrOne);
-
-        console.log('The BYTES Resykts', bytesResults)
+        bytesNBitsGame(randomInt, randomUnit, zeroOrOne);
 
         const responseAsString = jest.spyOn(practiceLib, "getUserInput");
-        responseAsString.mockImplementation(() => "11");
+        responseAsString.mockImplementation(() => "0.99");
+        practiceLib.getUserInput();
 
-        const numberOfQuestions = 4;
-        const result = letsPlay(numberOfQuestions)
+        const numberOfQuestions = 1;
+        const result = await letsPlay(numberOfQuestions);
 
-        expect(result).toBe()
-        // const randomInt = jest.spyOn(practiceLib, "generateRandomInt");
-        // randomInt.mockImplementation(() => 3);
+        expect(result).toBe(0);
+    })
 
-        // const randomUnit = jest.spyOn(practiceLib, "generateRandomUnit");
-        // randomUnit.mockImplementation(() => 'KB');
+    it("Returns 1 point when the input is correct", async () => {
+        expect.assertions(1);
 
-        // const zeroOrOne = jest.spyOn(practiceLib, "sizeGenerator");
-        // zeroOrOne.mockImplementation(() => "0");
+        const randomInt = 88;
+        const randomUnit = 'bits';
+        const zeroOrOne = '1';
+        bytesNBitsGame(randomInt, randomUnit, zeroOrOne);
 
-        // const answerIntAsString = bytesNBitsGame(randomInt, randomUnit, zeroOrOne);
-        // //  console.log('answer as trherere string', answerIntAsString)
-        // //const answerInt = parseFloat(answerIntAsString);
-        // answerIntAsString.mockImplementation(() => 4);
+        const responseAsString = jest.spyOn(practiceLib, "getUserInput");
+        responseAsString.mockImplementation(() => "0.003");
+        practiceLib.getUserInput();
 
-        // const answerInt = 4
-        // //const responseAsString = 4
+        const numberOfQuestions = 1;
+        const result = await letsPlay(numberOfQuestions);
 
-        // const responseAsString = jest.spyOn(practiceLib, "getUserInput");
-        // responseAsString.mockImplementation(() => 4);
-
-        // const numberOfQuestions = 4;
-        // const result = letsPlay(numberOfQuestions);
-
-        // expect(result).toBe('')
-
+        expect(result).toBe(1);
     })
 
 });
-
-// describe("This tests the letsPlay function: ", () => {
-//     it("Returns the letsPlay function.", () => {
-
-//         const start = jest.spyOn(practiceLib, "startTimer");
-//         start.mockImplementation(() => '0.01');
-
-//         const randInt = jest.spyOn(practiceLib, "generateRandomInt");
-//         randInt.mockImplementation(() => 5);
-
-//         const randUnit = jest.spyOn(practiceLib, "generateRandomUnit");
-//         randUnit.mockImplementation(() => 'KB');
-
-//         const zeroOrOne = jest.spyOn(practiceLib, "sizeGenerator");
-//         zeroOrOne.mockImplementation(() => '1');
-
-//         const answerIntAsString = bytesNBitsGame(randInt, randUnit, zeroOrOne);
-
-
-//         console.log('THIS IS START:', start)
-//         console.log('This is randINT', randInt)
-//         console.log('this is randUnit', randUnit)
-//         console.log('this is zero or one', zeroOrOne)
-
-//         console.log('HIIIIIIIIIIIIIIIII LEXA', answerIntAsString)
-//         const answerInt = parseFloat(answerIntAsString)
-
-//         console.log('here is the answerInt', answerInt)
-
-//         const responseAsString = jest.spyOn(practiceLib, "getUserInput");
-//         responseAsString.mockImplementation(() => '5')
-
-//         const numOfQuestions = 4;
-//         const result = letsPlay(numOfQuestions);
-//         expect(result).toBe();
-//     });
-// });
-
-
 
 describe("This tests the bytesNBitsGame function: ", () => {
 

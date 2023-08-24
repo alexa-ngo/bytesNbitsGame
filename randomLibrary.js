@@ -1,7 +1,7 @@
 const prompts = require('prompts');
 
 function generateRandomInt() {
-    return Math.floor(Math.random() * (128) + 1);
+    return (Math.floor(Math.random() * (128) + 1)).toString();
 }
 
 function generateRandomUnit() {

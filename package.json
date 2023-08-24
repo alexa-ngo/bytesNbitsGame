@@ -4,7 +4,8 @@
   "description": "Quick! This game checks to see how fast a user can convert their bites, bytes, KB, MB, and TB!",
   "main": "bytesNbits.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "keywords": [],
   "author": "",

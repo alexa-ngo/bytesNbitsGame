@@ -22,7 +22,7 @@ function bytesNBitsGame(randomInt, unit, zeroOrOne) {
         return `${answerInt}`;
 
     } else if (unit === 'B') {
-        if (inputUnit === '0') {   // was bits
+        if (inputUnit === '0') {
             answerInt = randomInt * 8;
             console.log(`____ bits = ${randomInt} B`);
             return `${answerInt}`;
@@ -64,7 +64,7 @@ function bytesNBitsGame(randomInt, unit, zeroOrOne) {
             console.log(`____ TB = ${randomInt} GB`);
             return `${answerInt}`;
         };
-    };
+    }
 };
 
 
@@ -77,7 +77,7 @@ async function letsPlay(numOfQuestions) {
     console.log(`****************************************************************`);
 
     // Starts the timer for the game
-    const start = startTimer()
+    const start = startTimer();
 
     // Tracks the number of points a player has earned
     let points = 0;
@@ -99,9 +99,9 @@ async function letsPlay(numOfQuestions) {
         const responseAsString = await getUserInput();
         const response = parseFloat(responseAsString);
 
-        if (response === answerInt) {
+        if (response <= answerInt + 0.00001 && response >= answerInt - 0.00001) {
             points++;
-        };
+        }
     };
 
     console.log();
@@ -121,8 +121,8 @@ async function letsPlay(numOfQuestions) {
     console.log(`You earned ${points} points out of ${numOfQuestions} questions!`);
     console.log();
     console.log(`****************************************************************`);
+    return points;
 };
-
 
 // Function calcuates the percentage of correct answers
 function calcPercent(points, numOfQuestions) {
@@ -148,7 +148,3 @@ module.exports = {
     letsPlay
 };
 
-// const numOfQuestions = 4;
-// const sTime = 1;
-
-// letsPlay(numOfQuestions, sTime);
