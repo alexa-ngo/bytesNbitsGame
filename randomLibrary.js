@@ -6,7 +6,8 @@ function generateRandomInt() {
 
 function generateRandomUnit() {
     const unitArr = ['bits', 'B', 'KB', 'MB', 'GB', 'TB'];
-    return unitArr[Math.floor(Math.random() * unitArr.length)];
+    const unitArrayResult = unitArr[Math.floor(Math.random() * unitArr.length)];
+    return unitArrayResult;
 }
 
 function sizeGenerator() {

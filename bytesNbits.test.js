@@ -12,20 +12,6 @@ jest.mock('./randomLibrary.js', () => ({
     getUserInput: jest.fn()
 }));
 
-describe("This tests the generateRandomInt function by mocking math.random: ", () => {
-
-    afterEach(() => {
-        jest.resetAllMocks();
-    });
-
-    it('Returns 58.', () => {
-
-        const randIntGen01 = jest.spyOn(practiceLib, "generateRandomInt");
-        randIntGen01.mockImplementation(() => 58);
-
-    })
-});
-
 describe("This tests the calculatePercent function: ", () => {
 
     afterEach(() => {

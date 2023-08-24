@@ -1,12 +1,11 @@
-
 const { positiveGenerator, improvementGenerator, generateRandomInt, generateRandomUnit, getUserInput, sizeGenerator, startTimer } = require("./randomLibrary.js");
 
 function bytesNBitsGame(randomInt, unit, zeroOrOne) {
 
-    // The calculated answer integer. The player will earn one point if they respond with this answer
+    // The calculated answer integer. The player will earn one point if they respond with this answer.
     let answerInt = 0;
 
-    // Assigns the unit for the player to convert to
+    // Assigns the unit for the player to convert to.
     let inputUnit = zeroOrOne;
 
     if (unit === 'bits') {
@@ -109,10 +108,6 @@ async function letsPlay(numOfQuestions) {
     console.log(`************************** YOUR STATS **************************`);
     console.log();
 
-    //Calcualtes the percent correct
-    const calcPer = calcPercent(points, numOfQuestions);
-    console.log(calcPer);
-
     // Ends the timer for the game
     const timeTaken = ((Date.now() - start) / 1000).toFixed(2);
 
@@ -141,10 +136,11 @@ function calcPercent(points, numOfQuestions) {
     };
 };
 
-
 module.exports = {
     calcPercent,
     bytesNBitsGame,
     letsPlay
 };
 
+
+letsPlay(10)
