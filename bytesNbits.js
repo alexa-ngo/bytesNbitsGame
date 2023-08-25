@@ -100,6 +100,11 @@ async function letsPlay(numOfQuestions) {
         const responseAsANumber = Number(responseAsString);
         const response = parseFloat(responseAsANumber);
 
+        console.log('the answer is', answerInt)
+        console.log('the answer is typeOfALELDLDLDLDALEXA', typeof answerInt)
+        console.log('the response is', response)
+        console.log('the response is typeOfALELDLDLDLDALEXA', typeof response)
+
         if (response <= answerInt + 0.00001 && response >= answerInt - 0.00001) {
             points++;
         }
@@ -120,7 +125,7 @@ async function letsPlay(numOfQuestions) {
     console.log(calcPercent(points, numOfQuestions));
     console.log();
     console.log(`****************************************************************`);
-    return points.toString();
+    return points;
 };
 
 // Function calcuates the percentage of correct answers

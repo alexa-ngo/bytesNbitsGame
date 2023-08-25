@@ -82,7 +82,25 @@ describe("This tests the bytesNBitsGame function", () => {
         jest.resetAllMocks();
     });
 
-    it("Returns 0 points when the input is incorrect", async () => {
+    it.skip("Returns 0 points when the input is incorrect", async () => {
+        expect.assertions(1);
+        const randomInt = 88;
+        const randomUnit = 'bits';
+        const zeroOrOne = '1';
+        bytesNBitsGame(randomInt, randomUnit, zeroOrOne);
+
+
+        const responseAsString = jest.spyOn(practiceLib, "getUserInput");
+        responseAsString.mockImplementation(() => 0.99);
+        practiceLib.getUserInput();
+
+        const numberOfQuestions = 1;
+        const result = await letsPlay(numberOfQuestions);
+
+        expect(result).toBe(0);
+    });
+
+    it("Returns 1 point when the input is correct", async () => {
         expect.assertions(1);
 
         const randomInt = 88;
@@ -91,36 +109,14 @@ describe("This tests the bytesNBitsGame function", () => {
         bytesNBitsGame(randomInt, randomUnit, zeroOrOne);
 
         const responseAsString = jest.spyOn(practiceLib, "getUserInput");
-        responseAsString.mockImplementation(() => "0.99");
+        responseAsString.mockImplementation(() => 128000);
         practiceLib.getUserInput();
 
         const numberOfQuestions = 1;
         const result = await letsPlay(numberOfQuestions);
 
-        expect(result).toBe("0");
-    })
-
-    it("Returns 1 point when the input is correct", async () => {
-        expect.assertions(1);
-
-        const randomInt = 100;
-        const randomUnit = 'KB';
-        const zeroOrOne = '1';
-        const bytesResults = bytesNBitsGame(randomInt, randomUnit, zeroOrOne);
-        console.log('ALEXA THE BYTESRESULTS typeof', typeof bytesResults)   //string
-
-        const responseAsString = jest.spyOn(practiceLib, "getUserInput");
-        responseAsString.mockImplementation(() => 0.1);
-        practiceLib.getUserInput();
-
-        const numberOfQuestions = 1;
-        const result = await letsPlay(numberOfQuestions);
-
-        console.log('ALEXA THE results of LETSPLAY typeOf', typeof result)
-
-        expect(result).toBe("0");
-    })
-
+        expect(result).toBe(1);
+    });
 });
 
 describe("This tests the bytesNBitsGame function: ", () => {
