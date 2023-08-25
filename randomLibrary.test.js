@@ -1,4 +1,6 @@
 const mathLib = require("./randomLibrary.js");
+const prompts = require("prompts");
+
 
 describe("This tests the Math.random in the generateRandomInt function: ", () => {
 
@@ -163,13 +165,13 @@ describe("This tests getUserInput() function: ", () => {
         jest.restoreAllMocks();
     });
 
-    it.skip("Returns 0891 as the input.", () => {
-        //const prompt = new prompt();
-        // const onChange = jest.fn();
+    it("Returns 891 as the input.", async () => {
+        expect.assertions(1);
 
-        //jest.spyOn(window, "prompts").mockImplementation(() => "0891");
-        //jest.spyOn(Date, 'now').mockImplementation(() => 1487076708000)
-        //const result = mathLib.getUserInput();
-        //expect(prompt).toBe("0891");
+        jest.spyOn(prompts, "prompt").mockResolvedValue({ value: 891 });
+        const result = await mathLib.getUserInput();
+        console.log('this is the result', result);
+        expect(result).toBe(891);
+
     });
 });

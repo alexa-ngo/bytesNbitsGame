@@ -33,7 +33,7 @@ function startTimer() {
 }
 
 async function getUserInput() {
-    const response = await prompts({
+    const response = await prompts.prompt({
         type: 'text', name: 'value', message: 'What is your input?'
     });
     return response.value;

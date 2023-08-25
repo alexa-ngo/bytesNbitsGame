@@ -126,7 +126,7 @@ async function letsPlay(numOfQuestions) {
 // Function calcuates the percentage of correct answers
 function calcPercent(points, numOfQuestions) {
 
-    const percentage = ((points / numOfQuestions) * 100).toFixed(2);
+    const percentage = ((points / numOfQuestions) * 100);
 
     const positiveComment = positiveGenerator();
     const improvementArrComment = improvementGenerator();
