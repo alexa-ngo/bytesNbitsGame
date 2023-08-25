@@ -1,11 +1,11 @@
-const { positiveGenerator, improvementGenerator, generateRandomInt, generateRandomUnit, getUserInput, sizeGenerator, startTimer } = require("./randomLibrary.js");
+const { generateRandomInt, generateRandomUnit, getUserInput, sizeGenerator, startTimer, positiveGenerator, improvementGenerator } = require("./randomLibrary.js");
 
 function bytesNBitsGame(randomInt, unit, zeroOrOne) {
 
-    // The calculated answer integer. The player will earn one point if they respond with this answer.
+    // This is the calculated answer integer. The player will earn one point if they respond with this answer.
     let answerInt = 0;
 
-    // Assigns the unit for the player to convert to.
+    // The zeroOrOne is randomly generated from the rnadomLibrary.js file. This assigns the unit for the player to convert to.
     let inputUnit = zeroOrOne;
 
     if (unit === 'bits') {
@@ -75,10 +75,10 @@ async function letsPlay(numOfQuestions) {
     console.log();
     console.log(`****************************************************************`);
 
-    // Starts the timer for the game
+    // Starts the timer for the game.
     const start = startTimer();
 
-    // Tracks the number of points a player has earned
+    // Tracks the number of points a player has earned.
     let points = 0;
 
     for (let i = 1; i < numOfQuestions + 1; i++) {
@@ -90,13 +90,15 @@ async function letsPlay(numOfQuestions) {
         const randomInt = generateRandomInt();
         const randomUnit = generateRandomUnit();
         const zeroOrOne = sizeGenerator();
-        const answerIntAsString = bytesNBitsGame(randomInt, randomUnit, zeroOrOne);
-        const answerInt = parseFloat(answerIntAsString);
+        const answerIntAsString1 = bytesNBitsGame(randomInt, randomUnit, zeroOrOne);
+        const answerIntAsString2 = Number(answerIntAsString1);
+        const answerInt = parseFloat(answerIntAsString2);
         console.log();
         console.log(answerInt);
 
         const responseAsString = await getUserInput();
-        const response = parseFloat(responseAsString);
+        const responseAsANumber = Number(responseAsString);
+        const response = parseFloat(responseAsANumber);
 
         if (response <= answerInt + 0.00001 && response >= answerInt - 0.00001) {
             points++;
@@ -108,21 +110,23 @@ async function letsPlay(numOfQuestions) {
     console.log(`************************** YOUR STATS **************************`);
     console.log();
 
-    // Ends the timer for the game
+    // Ends the timer for the game.
     const timeTaken = ((Date.now() - start) / 1000).toFixed(2);
 
     console.log(`Total time taken : ${timeTaken} seconds`);
     console.log();
     console.log(`You earned ${points} points out of ${numOfQuestions} questions!`);
     console.log();
+    console.log(calcPercent(points, numOfQuestions));
+    console.log();
     console.log(`****************************************************************`);
-    return points;
+    return points.toString();
 };
 
 // Function calcuates the percentage of correct answers
 function calcPercent(points, numOfQuestions) {
 
-    const percentage = (points / numOfQuestions) * 100;
+    const percentage = ((points / numOfQuestions) * 100).toFixed(2);
 
     const positiveComment = positiveGenerator();
     const improvementArrComment = improvementGenerator();
@@ -142,5 +146,4 @@ module.exports = {
     letsPlay
 };
 
-
-letsPlay(10)
+letsPlay(3)
