@@ -8,13 +8,12 @@
 - The integer and the unit to the question are randomly generated as well as the unit to the question.
 - At the end of your game, your stats will be displayed containing the amount of time the game took, the number of points earned, and a response based on your score!
 
-Example #1: Getting 2 out of 3 questions correct
+Example #1: Getting 2 out of 3 questions correct.
 
 ![Alt text](image.png)
 
-Example #2: Getting 3 out of 3 questions correct
+Example #2: Getting 3 out of 3 questions correct.
 
 ![Alt text](image-1.png)
-
 
 Are you ready to test your Bites, B, KB, MB, GB, and TB? Ready, set, GOOOO!!!!!!  🥉 🤗
